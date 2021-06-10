@@ -137,12 +137,14 @@ class LibraryContentLifecycle(
               seriesRepository.findByLibraryIdAndUrlOrNull(library.id, newSidecar.parentUrl)?.let { series ->
                 when (newSidecar.type) {
                   Sidecar.Type.ARTWORK -> taskReceiver.refreshSeriesLocalArtwork(series.id)
+                  Sidecar.Type.METADATA -> taskReceiver.refreshSeriesMetadata(series.id)
                 }
               }
             Sidecar.Source.BOOK ->
               bookRepository.findByLibraryIdAndUrlOrNull(library.id, newSidecar.parentUrl)?.let { book ->
                 when (newSidecar.type) {
                   Sidecar.Type.ARTWORK -> taskReceiver.refreshBookLocalArtwork(book.id)
+                  Sidecar.Type.METADATA -> taskReceiver.refreshBookMetadata(book.id)
                 }
               }
           }
